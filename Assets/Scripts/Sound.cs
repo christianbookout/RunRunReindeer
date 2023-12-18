@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+// Rename YourGameScript to Sound
 public class Sound : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public AudioClip soundClip;
+    public AudioClip musicCLip;
+
     void Start()
     {
-        
-    }
+        // Play a sound effect
+        AudioManager.instance.PlaySoundEffect(soundClip);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Play background music
+        AudioManager.instance.PlayMusic(musicCLip);
     }
 }
