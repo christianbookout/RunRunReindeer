@@ -3,6 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    //test for github 
+
     public float speed = 5f;
     public float rotationSpeed = 2f;
 
