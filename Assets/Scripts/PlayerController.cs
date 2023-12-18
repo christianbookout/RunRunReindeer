@@ -1,60 +1,54 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    public float movementSpeed = 5.0f;
-    public float mouseSensitivity = 2.0f;
+    public float speed = 5f;
+    public float rotationSpeed = 2f;
 
     private CharacterController characterController;
-    private Camera playerCamera;
-    private float verticalRotation = 0f;
+    private PlayerFootsteps playerFootsteps;
 
-    void Start()
+    private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
+        Cursor.visible = false; // Hide the cursor
+
         characterController = GetComponent<CharacterController>();
-        playerCamera = GetComponentInChildren<Camera>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+
+        // Attach the PlayerFootsteps script to the same GameObject
+        playerFootsteps = gameObject.AddComponent<PlayerFootsteps>();
     }
 
-    void Update()
+    private void Update()
     {
-        // Handle player movement
-        HandleMovement();
-
-        // Handle player rotation
-        HandleRotation();
+        HandleMovementInput();
     }
 
-    void HandleMovement()
+    private void HandleMovementInput()
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = transform.TransformDirection(new Vector3(horizontal, 0, vertical));
-        movement *= movementSpeed;
+        // Calculate movement direction
+        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+        Vector3 moveDirection = transform.TransformDirection(direction);
 
-        // Apply gravity
-        movement.y -= 9.8f * Time.deltaTime;
+        // Apply movement
+        characterController.Move(moveDirection * speed * Time.deltaTime);
 
-        // Move the character controller
-        characterController.Move(movement * Time.deltaTime);
-    }
-
-    void HandleRotation()
-    {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
-
-        // Rotate the player around the Y-axis
+        // Rotate the player based on horizontal input
+        float mouseX = Input.GetAxis("Mouse X") * rotationSpeed;
         transform.Rotate(Vector3.up * mouseX);
 
-        // Rotate the camera around the X-axis
-        verticalRotation -= mouseY;
-        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
+        // Determine if the player is moving
+        bool isMoving = characterController.isGrounded && characterController.velocity.magnitude > 0;
 
-        playerCamera.transform.localRotation = Quaternion.Euler(verticalRotation, 0f, 0f);
+        // Set the isMoving variable in the PlayerFootsteps script
+        playerFootsteps.SetIsMoving(isMoving);
+
+        // Debug logs for troubleshooting
+        Debug.Log("isMoving: " + isMoving);
+        Debug.Log("Velocity Magnitude: " + characterController.velocity.magnitude);
     }
 }

@@ -1,17 +1,13 @@
 using UnityEngine;
 
-// Rename YourGameScript to Sound
-public class Sound : MonoBehaviour
+[System.Serializable]
+public class Sound
 {
-    public AudioClip soundClip;
-    public AudioClip musicCLip;
+    public string name;
+    public AudioClip clip; // Make sure to import the UnityEngine namespace
 
-    void Start()
-    {
-        // Play a sound effect
-        AudioManager.instance.PlaySoundEffect(soundClip);
+    [Range(0f, 1f)] public float volume = 1f;
+    [Range(0.1f, 3f)] public float pitch = 1f;
 
-        // Play background music
-        AudioManager.instance.PlayMusic(musicCLip);
-    }
+    [HideInInspector] public AudioSource source;
 }

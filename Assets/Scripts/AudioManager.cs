@@ -2,63 +2,29 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance; // Singleton instance
+    public static AudioManager Instance;
 
-    public AudioSource[] soundEffectSources; // Array of AudioSources for sound effects
-    public AudioSource[] musicSources; // Array of AudioSources for background music
-
-    void Awake()
+    private void Awake()
     {
-        // Create a singleton instance
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+        if (Instance == null)
+            Instance = this;
         else
-        {
             Destroy(gameObject);
-        }
+
+        DontDestroyOnLoad(gameObject);
     }
 
-    // Play a sound effect
-    public void PlaySoundEffect(AudioClip clip, float volume = 1.0f)
-    {
-        // Find an available sound effect source
-        foreach (var source in soundEffectSources)
-        {
-            if (!source.isPlaying)
-            {
-                source.volume = volume;
-                source.PlayOneShot(clip);
-                return;
-            }
-        }
-    }
+    // Add any global audio settings or variables here
 
-    // Play background music
-    public void PlayMusic(AudioClip clip, float volume = 1.0f)
+    public void PlaySound(Sound sound)
     {
-        // Find an available music source
-        foreach (var source in musicSources)
-        {
-            if (!source.isPlaying)
-            {
-                source.volume = volume;
-                source.clip = clip;
-                source.loop = true;
-                source.Play();
-                return;
-            }
-        }
-    }
+        sound.source = gameObject.AddComponent<AudioSource>();
+        sound.source.clip = sound.clip;
+        sound.source.volume = sound.volume;
+        sound.source.pitch = sound.pitch;
+        sound.source.Play();
 
-    // Stop playing background music
-    public void StopMusic()
-    {
-        foreach (var source in musicSources)
-        {
-            source.Stop();
-        }
+        // Optionally, destroy the AudioSource component after the sound has finished playing
+        Destroy(sound.source, sound.clip.length);
     }
 }
