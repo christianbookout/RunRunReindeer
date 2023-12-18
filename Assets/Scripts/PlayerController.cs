@@ -43,8 +43,10 @@ public class PlayerController : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * rotationSpeed;
         transform.Rotate(Vector3.up * mouseX);
 
+        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, out _, 1.5f);
+
         // Determine if the player is moving
-        bool isMoving = characterController.isGrounded && characterController.velocity.magnitude > 0;
+        bool isMoving = isGrounded && characterController.velocity.magnitude > 0;
 
         // Set the isMoving variable in the PlayerFootsteps script
         playerFootsteps.SetIsMoving(isMoving);
