@@ -3,26 +3,41 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    //test for github 
-
-    public float speed = 5f;
+    [Header("Movement")]
+    public float speed = 3f;
     public float rotationSpeed = 2f;
+    public float runSpeed = 5f;
+    public float runSeconds = 5f;
+    public float runCooldownSeconds = 5f;
+    [Header("Headbob/Breathing")]
+    public float headbobWalkMagnitude = 0.05f;
+    public float headbobRunMagnitude = 0.1f;
+    public float headbobSpeed = 2f;
+    public float breathingAmplitude = 0.1f;
+    public float breatheSpeed = 0.5f;
+    public Camera playerCamera;
 
     private CharacterController characterController;
     private PlayerFootsteps playerFootsteps;
+    private Vector3 originalCameraPosition;
+    private float headbobTimer = 0.0f;
+    private float breatheTimer = 0.0f;
+    private bool lastFrameWasMoving = false;
+    private float targetBobPos = 0f;
 
-    private void Start()
+    public void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
-        Cursor.visible = false; // Hide the cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         characterController = GetComponent<CharacterController>();
-
-        // Attach the PlayerFootsteps script to the same GameObject
         playerFootsteps = gameObject.AddComponent<PlayerFootsteps>();
+        playerCamera = GetComponentInChildren<Camera>();
+        originalCameraPosition = playerCamera.transform.localPosition;
+        targetBobPos = originalCameraPosition.y;
     }
 
-    private void Update()
+    public void Update()
     {
         HandleMovementInput();
     }
@@ -31,28 +46,50 @@ public class PlayerController : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-
-        // Calculate movement direction
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
         Vector3 moveDirection = transform.TransformDirection(direction);
 
-        // Apply movement
-        characterController.Move(moveDirection * speed * Time.deltaTime);
+        bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        float curSpeed = isRunning ? runSpeed : speed;
 
-        // Rotate the player based on horizontal input
+        characterController.Move(moveDirection * curSpeed * Time.deltaTime);
+
         float mouseX = Input.GetAxis("Mouse X") * rotationSpeed;
-        transform.Rotate(Vector3.up * mouseX);
+        float mouseY = Input.GetAxis("Mouse Y") * rotationSpeed;
+        transform.Rotate(0f, mouseX, 0f);
+        playerCamera.transform.Rotate(-mouseY, 0f, 0f);
 
         bool isGrounded = Physics.Raycast(transform.position, Vector3.down, out _, 1.5f);
-
-        // Determine if the player is moving
         bool isMoving = isGrounded && characterController.velocity.magnitude > 0;
+        playerFootsteps.SetIsMoving(isMoving, isRunning);
 
-        // Set the isMoving variable in the PlayerFootsteps script
-        playerFootsteps.SetIsMoving(isMoving);
+        if (isMoving) {
+            if (!lastFrameWasMoving) headbobTimer = 0f;
+            headbobTimer += Time.deltaTime * speed * headbobSpeed;
+            Headbob(isRunning ? headbobRunMagnitude : headbobWalkMagnitude);
+        } else {
+            if (lastFrameWasMoving) breatheTimer = 0f;
+            breatheTimer += Time.deltaTime * speed * breatheSpeed;
+            BreatheHeadBob();
+        }
+        // Lerp between current camera y and target bob position
+        playerCamera.transform.localPosition = new Vector3(
+            playerCamera.transform.localPosition.x,
+            Mathf.Lerp(playerCamera.transform.localPosition.y, targetBobPos, Time.deltaTime * 10f),
+            playerCamera.transform.localPosition.z
+        );
+        lastFrameWasMoving = isMoving;
+    }
 
-        // Debug logs for troubleshooting
-        Debug.Log("isMoving: " + isMoving);
-        Debug.Log("Velocity Magnitude: " + characterController.velocity.magnitude);
+    private void BreatheHeadBob()
+    {
+        float breathingEffect = Mathf.Sin(breatheTimer) * breathingAmplitude;
+        targetBobPos = originalCameraPosition.y + breathingEffect;
+    }
+
+    private void Headbob(float magnitude)
+    {
+        float bobbingEffect = Mathf.Sin(headbobTimer) * magnitude;
+        targetBobPos = originalCameraPosition.y + bobbingEffect;
     }
 }
