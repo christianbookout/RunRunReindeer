@@ -7,7 +7,7 @@ public class ItemSpawner : MonoBehaviour
     public static ItemSpawner instance;
     public List<GameObject> items = new();
     GameObject[] spawnLocations;
-    void Start()
+    public void Start()
     {
         if (instance != null)
         {

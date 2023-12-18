@@ -38,6 +38,8 @@ public class PlayerFootsteps : MonoBehaviour
         // Play footsteps sound when moving
         if (isMoving && !footstepsAudioSource.isPlaying)
         {
+            footstepsAudioSource.volume = Random.Range(0.5f, 0.9f);
+            footstepsAudioSource.pitch = Random.Range(0.7f, 0.9f);
             footstepsAudioSource.Play();
             Debug.Log("Playing Footsteps");
         }

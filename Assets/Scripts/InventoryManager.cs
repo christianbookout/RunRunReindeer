@@ -7,7 +7,7 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager instance;
     public List<Item> heldItems = new();
 
-    void Start()
+    public void Start()
     {
         if (instance != null)
         {
