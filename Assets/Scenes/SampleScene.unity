@@ -250,7 +250,6 @@ GameObject:
   - component: {fileID: 227423027}
   - component: {fileID: 227423026}
   - component: {fileID: 227423025}
-  - component: {fileID: 227423029}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Untagged
@@ -344,22 +343,6 @@ Transform:
   m_Father: {fileID: 1483853296}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &227423029
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227423024}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &415485644
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,7 +355,6 @@ GameObject:
   - component: {fileID: 415485647}
   - component: {fileID: 415485646}
   - component: {fileID: 415485645}
-  - component: {fileID: 415485649}
   m_Layer: 0
   m_Name: Tree (5)
   m_TagString: Untagged
@@ -466,22 +448,6 @@ Transform:
   m_Father: {fileID: 1483853296}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &415485649
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 415485644}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &502808798
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,7 +460,6 @@ GameObject:
   - component: {fileID: 502808801}
   - component: {fileID: 502808800}
   - component: {fileID: 502808799}
-  - component: {fileID: 502808803}
   m_Layer: 0
   m_Name: Tree (15)
   m_TagString: Untagged
@@ -588,22 +553,6 @@ Transform:
   m_Father: {fileID: 1483853296}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &502808803
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 502808798}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &524028770
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,7 +659,6 @@ GameObject:
   - component: {fileID: 533350859}
   - component: {fileID: 533350858}
   - component: {fileID: 533350857}
-  - component: {fileID: 533350861}
   m_Layer: 0
   m_Name: Tree (17)
   m_TagString: Untagged
@@ -804,22 +752,6 @@ Transform:
   m_Father: {fileID: 1483853296}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &533350861
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 533350856}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &537219992
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,7 +764,6 @@ GameObject:
   - component: {fileID: 537219995}
   - component: {fileID: 537219994}
   - component: {fileID: 537219993}
-  - component: {fileID: 537219997}
   m_Layer: 0
   m_Name: Tree (16)
   m_TagString: Untagged
@@ -926,22 +857,6 @@ Transform:
   m_Father: {fileID: 1483853296}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &537219997
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 537219992}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &567733117
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,7 +869,6 @@ GameObject:
   - component: {fileID: 567733120}
   - component: {fileID: 567733119}
   - component: {fileID: 567733118}
-  - component: {fileID: 567733122}
   m_Layer: 0
   m_Name: Tree (14)
   m_TagString: Untagged
@@ -1048,22 +962,11 @@ Transform:
   m_Father: {fileID: 1483853296}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &567733122
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!1 &622143595 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2666242146490985945, guid: ee0947fada3a5254c8a0a4ab60e52e77, type: 3}
+  m_PrefabInstance: {fileID: 2407171036775796033}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 567733117}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &792116986
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,7 +979,6 @@ GameObject:
   - component: {fileID: 792116989}
   - component: {fileID: 792116988}
   - component: {fileID: 792116987}
-  - component: {fileID: 792116991}
   m_Layer: 0
   m_Name: Tree (10)
   m_TagString: Untagged
@@ -1170,22 +1072,6 @@ Transform:
   m_Father: {fileID: 1483853296}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &792116991
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 792116986}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &829118020
 GameObject:
   m_ObjectHideFlags: 0
@@ -1339,7 +1225,6 @@ GameObject:
   - component: {fileID: 950727387}
   - component: {fileID: 950727386}
   - component: {fileID: 950727385}
-  - component: {fileID: 950727389}
   m_Layer: 0
   m_Name: Tree (9)
   m_TagString: Untagged
@@ -1433,22 +1318,6 @@ Transform:
   m_Father: {fileID: 1483853296}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &950727389
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 950727384}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &967653297
 GameObject:
   m_ObjectHideFlags: 0
@@ -1461,7 +1330,6 @@ GameObject:
   - component: {fileID: 967653300}
   - component: {fileID: 967653299}
   - component: {fileID: 967653298}
-  - component: {fileID: 967653302}
   m_Layer: 0
   m_Name: Tree (11)
   m_TagString: Untagged
@@ -1555,22 +1423,6 @@ Transform:
   m_Father: {fileID: 1483853296}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &967653302
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 967653297}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &985078432
 GameObject:
   m_ObjectHideFlags: 0
@@ -1583,7 +1435,6 @@ GameObject:
   - component: {fileID: 985078435}
   - component: {fileID: 985078434}
   - component: {fileID: 985078433}
-  - component: {fileID: 985078437}
   m_Layer: 0
   m_Name: Tree (1)
   m_TagString: Untagged
@@ -1677,22 +1528,6 @@ Transform:
   m_Father: {fileID: 1483853296}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &985078437
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 985078432}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &1015285330
 GameObject:
   m_ObjectHideFlags: 0
@@ -1705,7 +1540,6 @@ GameObject:
   - component: {fileID: 1015285333}
   - component: {fileID: 1015285332}
   - component: {fileID: 1015285331}
-  - component: {fileID: 1015285335}
   m_Layer: 0
   m_Name: Tree (2)
   m_TagString: Untagged
@@ -1799,22 +1633,6 @@ Transform:
   m_Father: {fileID: 1483853296}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &1015285335
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1015285330}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &1024181334
 GameObject:
   m_ObjectHideFlags: 0
@@ -1827,7 +1645,6 @@ GameObject:
   - component: {fileID: 1024181337}
   - component: {fileID: 1024181336}
   - component: {fileID: 1024181335}
-  - component: {fileID: 1024181339}
   m_Layer: 0
   m_Name: Tree (8)
   m_TagString: Untagged
@@ -1921,22 +1738,6 @@ Transform:
   m_Father: {fileID: 1483853296}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &1024181339
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1024181334}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &1030326418
 GameObject:
   m_ObjectHideFlags: 0
@@ -2073,7 +1874,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: f3cd2c6f03a8f4c6b8c8c767ec2abc62, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &1270451708
 GameObject:
@@ -2088,6 +1889,7 @@ GameObject:
   - component: {fileID: 1270451711}
   - component: {fileID: 1270451710}
   - component: {fileID: 1270451709}
+  - component: {fileID: 1270451714}
   m_Layer: 0
   m_Name: Rudolph
   m_TagString: Untagged
@@ -2201,10 +2003,32 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1950764880}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1270451714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270451708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0685740af6a5741c8b28cc06f5136bc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 622143595}
+  attackDistance: 1.5
+  loseSightDistance: 15
+  sightDistance: 10
+  hearsRunningDistance: 15
+  hearsWalkingDistance: 10
+  smellExponentialDecay: 1.1
+  smellRadius: 2
+  smellUpdateSeconds: 3
 --- !u!1 &1293129690
 GameObject:
   m_ObjectHideFlags: 0
@@ -2217,7 +2041,6 @@ GameObject:
   - component: {fileID: 1293129693}
   - component: {fileID: 1293129692}
   - component: {fileID: 1293129691}
-  - component: {fileID: 1293129695}
   m_Layer: 0
   m_Name: Tree (3)
   m_TagString: Untagged
@@ -2311,22 +2134,6 @@ Transform:
   m_Father: {fileID: 1483853296}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &1293129695
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1293129690}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &1483853295
 GameObject:
   m_ObjectHideFlags: 0
@@ -2388,7 +2195,6 @@ GameObject:
   - component: {fileID: 1712092449}
   - component: {fileID: 1712092448}
   - component: {fileID: 1712092447}
-  - component: {fileID: 1712092451}
   m_Layer: 0
   m_Name: Tree (12)
   m_TagString: Untagged
@@ -2482,22 +2288,6 @@ Transform:
   m_Father: {fileID: 1483853296}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &1712092451
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1712092446}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &1768918970
 GameObject:
   m_ObjectHideFlags: 0
@@ -2559,7 +2349,6 @@ GameObject:
   - component: {fileID: 1822388873}
   - component: {fileID: 1822388872}
   - component: {fileID: 1822388871}
-  - component: {fileID: 1822388875}
   m_Layer: 0
   m_Name: Tree (13)
   m_TagString: Untagged
@@ -2653,22 +2442,6 @@ Transform:
   m_Father: {fileID: 1483853296}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &1822388875
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1822388870}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &1833663737
 GameObject:
   m_ObjectHideFlags: 0
@@ -2681,7 +2454,6 @@ GameObject:
   - component: {fileID: 1833663740}
   - component: {fileID: 1833663739}
   - component: {fileID: 1833663738}
-  - component: {fileID: 1833663742}
   m_Layer: 0
   m_Name: Tree (7)
   m_TagString: Untagged
@@ -2775,22 +2547,100 @@ Transform:
   m_Father: {fileID: 1483853296}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &1833663742
-NavMeshObstacle:
+--- !u!1 &1950764879
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1833663737}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1950764880}
+  - component: {fileID: 1950764881}
+  m_Layer: 0
+  m_Name: Point Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1950764880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950764879}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.46099997, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1270451713}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &1950764881
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950764879}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
+  serializedVersion: 10
+  m_Type: 2
+  m_Shape: 0
+  m_Color: {r: 1, g: 0.15566039, b: 0.20958953, a: 1}
+  m_Intensity: 4.3
+  m_Range: 35.47
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &1997590212
 GameObject:
   m_ObjectHideFlags: 0
@@ -2803,7 +2653,6 @@ GameObject:
   - component: {fileID: 1997590215}
   - component: {fileID: 1997590214}
   - component: {fileID: 1997590213}
-  - component: {fileID: 1997590217}
   m_Layer: 0
   m_Name: Tree (6)
   m_TagString: Untagged
@@ -2897,22 +2746,6 @@ Transform:
   m_Father: {fileID: 1483853296}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &1997590217
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997590212}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &2064220406
 GameObject:
   m_ObjectHideFlags: 0
@@ -2925,7 +2758,6 @@ GameObject:
   - component: {fileID: 2064220409}
   - component: {fileID: 2064220408}
   - component: {fileID: 2064220407}
-  - component: {fileID: 2064220411}
   m_Layer: 0
   m_Name: Tree (4)
   m_TagString: Untagged
@@ -3019,22 +2851,6 @@ Transform:
   m_Father: {fileID: 1483853296}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &2064220411
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2064220406}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1001 &2407171036775796033
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3074,6 +2890,10 @@ PrefabInstance:
     - target: {fileID: 2666242146490985945, guid: ee0947fada3a5254c8a0a4ab60e52e77, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2666242146490985945, guid: ee0947fada3a5254c8a0a4ab60e52e77, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4374721091421174930, guid: ee0947fada3a5254c8a0a4ab60e52e77, type: 3}
       propertyPath: m_LocalPosition.y
