@@ -54,16 +54,11 @@ public class PlayerFootsteps : MonoBehaviour
             footstepsAudioSource.volume = Random.Range(curVolumeRange.x, curVolumeRange.y);
             footstepsAudioSource.pitch = Random.Range(curPitchRange.x, curPitchRange.y);
             footstepsAudioSource.Play();
-            Debug.Log("Playing Footsteps");
         }
         else if (!isMoving && footstepsAudioSource.isPlaying)
         {
             footstepsAudioSource.Stop();
-            Debug.Log("Stopping Footsteps");
         }
-
-        Debug.Log("isMoving: " + isMoving);
-        Debug.Log("Is Playing: " + footstepsAudioSource.isPlaying);
     }
 
     public void SetIsMoving(bool moving, bool isRunning = false)

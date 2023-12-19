@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
     private float breatheTimer = 0.0f;
     private bool lastFrameWasMoving = false;
     private float targetBobPos = 0f;
+    public bool IsRunning { get; private set; } = false;
+    public bool IsWalking { get; private set; } = false;
+    
 
     public void Start()
     {
@@ -49,8 +52,8 @@ public class PlayerController : MonoBehaviour
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
         Vector3 moveDirection = transform.TransformDirection(direction);
 
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeed = isRunning ? runSpeed : speed;
+        IsRunning = Input.GetKey(KeyCode.LeftShift);
+        float curSpeed = IsRunning ? runSpeed : speed;
 
         characterController.Move(moveDirection * curSpeed * Time.deltaTime);
 
@@ -61,12 +64,12 @@ public class PlayerController : MonoBehaviour
 
         bool isGrounded = Physics.Raycast(transform.position, Vector3.down, out _, 1.5f);
         bool isMoving = isGrounded && characterController.velocity.magnitude > 0;
-        playerFootsteps.SetIsMoving(isMoving, isRunning);
+        playerFootsteps.SetIsMoving(isMoving, IsRunning);
 
         if (isMoving) {
             if (!lastFrameWasMoving) headbobTimer = 0f;
             headbobTimer += Time.deltaTime * speed * headbobSpeed;
-            Headbob(isRunning ? headbobRunMagnitude : headbobWalkMagnitude);
+            Headbob(IsRunning ? headbobRunMagnitude : headbobWalkMagnitude);
         } else {
             if (lastFrameWasMoving) breatheTimer = 0f;
             breatheTimer += Time.deltaTime * speed * breatheSpeed;
@@ -79,6 +82,7 @@ public class PlayerController : MonoBehaviour
             playerCamera.transform.localPosition.z
         );
         lastFrameWasMoving = isMoving;
+        IsWalking = isMoving && !IsRunning;
     }
 
     private void BreatheHeadBob()
