@@ -17,6 +17,7 @@ public class RudolphController : MonoBehaviour
     public float smellExponentialDecay = 0.5f;
     public float smellRadius = 1000f;
     public float smellUpdateSeconds = 3f;
+    public float loseInterestTime = 5f;
     private NavMeshAgent agent;
     
     public enum State
@@ -52,7 +53,6 @@ public class RudolphController : MonoBehaviour
 
     Vector3 moveLocation = Vector3.zero;
     float curRadius = 0f;
-    float lastPositionUpdate = 0f;
 
     void HuntPlayer()
     {
@@ -67,32 +67,42 @@ public class RudolphController : MonoBehaviour
             curRadius = 0f;
         }
         else if (Vector3.Distance(transform.position, moveLocation) < 3f || 
-                 Vector3.Distance(moveLocation, player.transform.position) > curRadius ||
-                 lastPositionUpdate + smellUpdateSeconds < Time.time)
+                 Vector3.Distance(moveLocation, player.transform.position) > curRadius)
         {
             float smell = Mathf.Pow(smellExponentialDecay, distance);
 
             curRadius = smell * smellRadius;
-            Vector3 randomPoint = UnityEngine.Random.insideUnitSphere * curRadius;
-            moveLocation = player.transform.position + randomPoint;
-
-            lastPositionUpdate = Time.time;
+            // Find a safe position for Rudolph to move to
+            do {
+                Vector3 randomPoint = UnityEngine.Random.insideUnitSphere * curRadius;
+                moveLocation = player.transform.position + randomPoint;
+            } while (!NavMesh.SamplePosition(moveLocation, out NavMeshHit _, 1f, NavMesh.AllAreas));
         }
         agent.SetDestination(moveLocation);
         
     }
 
-    public void OnDrawGizmos() {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, curRadius);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(moveLocation, 1f);
-    }
+    float hideTime = 0f;
 
     void ChasePlayer()
     {
         float distance = Vector3.Distance(transform.position, player.transform.position);
-        if (distance > loseSightDistance)
+        bool seesPlayer = Physics.Raycast(transform.position, player.transform.position - transform.position, out RaycastHit _, sightDistance);
+        // Check if Rudolph can see the player
+        if (!seesPlayer && hideTime < loseInterestTime)
+        {
+            hideTime += Time.deltaTime;
+        }
+        // If Rudolph hasn't seen the player for a given amount of time, Rudolph should go back to hunting
+        else if (!seesPlayer && hideTime >= loseInterestTime)
+        {
+            currentState = State.Hunting;
+        }
+        else {
+            hideTime = 0f;
+        }
+
+        if (distance > loseSightDistance )
         {
             currentState = State.Hunting;
         }

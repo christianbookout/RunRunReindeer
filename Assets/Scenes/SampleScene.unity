@@ -2022,13 +2022,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 622143595}
   attackDistance: 1.5
-  loseSightDistance: 15
-  sightDistance: 10
-  hearsRunningDistance: 15
+  loseSightDistance: 30
+  sightDistance: 25
+  hearsRunningDistance: 20
   hearsWalkingDistance: 10
   smellExponentialDecay: 1.1
   smellRadius: 2
   smellUpdateSeconds: 3
+  loseInterestTime: 5
 --- !u!1 &1293129690
 GameObject:
   m_ObjectHideFlags: 0
