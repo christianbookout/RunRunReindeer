@@ -43,6 +43,12 @@ public class PlayerController : MonoBehaviour
     public void Update()
     {
         HandleMovementInput();
+        AddGravity();
+    }
+
+    private void AddGravity() {
+        var gravity = Physics.gravity;
+        characterController.Move(gravity * Time.deltaTime);
     }
 
     private void HandleMovementInput()
