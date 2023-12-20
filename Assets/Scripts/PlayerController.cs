@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
         stamina = Mathf.Clamp(stamina, 0, maxStamina);
         return curSpeed;
     }
-
+    private float verticalRotation = 0f;
     private void HandleMovementInput()
     {
         float horizontal = Input.GetAxis("Horizontal");
@@ -111,8 +111,11 @@ public class PlayerController : MonoBehaviour
 
         float mouseX = Input.GetAxis("Mouse X") * rotationSpeed;
         float mouseY = Input.GetAxis("Mouse Y") * rotationSpeed;
+
+        verticalRotation += mouseY;
+        verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
         transform.Rotate(0f, mouseX, 0f);
-        playerCamera.transform.Rotate(-mouseY, 0f, 0f);
+        playerCamera.transform.localEulerAngles = new Vector3(-verticalRotation, 0f, 0f);
 
         bool isGrounded = Physics.Raycast(transform.position, Vector3.down, out _, 1.5f);
         bool isMoving = isGrounded && characterController.velocity.magnitude > 0;
