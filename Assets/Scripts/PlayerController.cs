@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
+        if (GameManager.Instance.gameState != GameManager.GameState.Playing) return;
         HandleMovementInput();
         HandleStaminaCooldown();
         AddGravity();

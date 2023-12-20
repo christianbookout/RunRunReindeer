@@ -55,6 +55,7 @@ public class RudolphController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.gameState != GameManager.GameState.Playing) return;
         switch (currentState)
         {
             case State.Hunting:
@@ -221,20 +222,20 @@ public class RudolphController : MonoBehaviour
             agent.SetDestination(player.transform.position);
         }
         
-        // TODO attacking?
+        if (Vector3.Distance(transform.position, player.transform.position) < attackDistance)
+        {
+            currentState = State.Attacking;
+        }
     }
 
     void AttackPlayer()
     {
-        float distance = Vector3.Distance(transform.position, player.transform.position);
-        if (distance > attackDistance)
-        {
-            currentState = State.Chasing;
-        }
-        else
-        {
-            agent.SetDestination(player.transform.position);
-            // TODO kill player here
-        }
+        // TODO other animations or something here?
+        player.transform.rotation = Quaternion.LookRotation(transform.position - player.transform.position);
+        GameManager.Instance.EndGame();
+        // Not sure if we want this jumpscare sound or not
+        locatedRoar.pitch = 2f;
+        locatedRoar.Play();
+        // TODO end game UI
     }
 }
