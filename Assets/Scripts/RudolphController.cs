@@ -7,7 +7,18 @@ using UnityEngine.AI;
 public class RudolphController : MonoBehaviour
 {
     public GameObject player;
-    private PlayerController playerController;
+    [Header("Audio")]
+    public AudioSource huff;
+    public AudioSource locatedRoar;
+    public AudioSource searchingRoar;
+    public AudioSource footsteps;
+    public float footstepsWalkPitch = 1f;
+    public float footstepsRunPitch = 1.5f;
+    public float searchingRoarFrequency = 30f;
+    public float searchingRoarFrequencyVariance = 15f;
+    public float searchingRoarPitch = 1f;
+    public float searchingRoarPitchVariance = 0.2f;
+    [Header("AI Movement")]
     public float attackDistance = 1.5f;
     public float viewAngle = 120f;
     // The distance Rudolph loses the player from their sight, and must rely on scent.
@@ -15,15 +26,17 @@ public class RudolphController : MonoBehaviour
     public float sightDistance = 10f;
     public float hearsRunningDistance = 15f;
     public float hearsWalkingDistance = 10f;
+    public float loseInterestTime = 5f;
+    // The time Rudolph will take after losing interest and before finding a new point to search by scent.
+    public float walkAwayTime = 2f;
+    [Header("AI Smell")]
     public float smellExponentialDecay = 0.5f;
     public float randomMovePointRadiusOffset = 5f;
     public float maxSmellRadius = 50f;
     public float minSmellRadius = 25f;
     public float smellUpdateSeconds = 3f;
-    public float loseInterestTime = 5f;
-    // The time Rudolph will take after losing interest and before finding a new point to search by scent.
-    public float walkAwayTime = 2f;
     private NavMeshAgent agent;
+    private PlayerController playerController;
     
     public enum State
     {
@@ -55,22 +68,36 @@ public class RudolphController : MonoBehaviour
                 break;
         }
         AddGravity();
+        WalkSound();
+        SearchingRoar();
     }
 
+    private void WalkSound() {
+        if (currentState == State.Chasing) {
+            footsteps.pitch = footstepsRunPitch;
+        }
+        else {
+            footsteps.pitch = footstepsWalkPitch;
+        }
+        
+        if (agent.velocity.magnitude > 0.1f && !footsteps.isPlaying) {
+            footsteps.Play();
+        }
+        else if (agent.velocity.magnitude <= 0.1f && footsteps.isPlaying) {
+            footsteps.Stop();
+        }
+    }
+    
     private void AddGravity() {
         var gravity = Physics.gravity;
         agent.Move(gravity * Time.deltaTime);
     }
-
-    Vector3 moveLocation = Vector3.zero;
-    float curRadius = 0f;
 
     bool HearsPlayer() {
         float distance = Vector3.Distance(transform.position, player.transform.position);
         bool hearsPlayer = (playerController.IsRunning && distance < hearsRunningDistance) || (playerController.IsWalking && distance < hearsWalkingDistance);
         return hearsPlayer;
     }
-
 
     bool SeesPlayer()
     {
@@ -95,7 +122,32 @@ public class RudolphController : MonoBehaviour
         return groundPos;
     }
 
+    float nextRoarTime = 0f; 
+    void SearchingRoar() {
+        if (currentState != State.Hunting) {
+            nextRoarTime = 0f;
+            return;
+        }
+
+        float calculateRoarTime() {
+            return Time.time + UnityEngine.Random.Range(searchingRoarFrequency - searchingRoarFrequencyVariance, searchingRoarFrequency + searchingRoarFrequencyVariance);
+        }
+
+        // When the previous state was chasing, Rudolph's next roar should be delayed.
+        if (nextRoarTime == 0f) {
+            nextRoarTime = calculateRoarTime();
+        }
+
+        if (Time.time > nextRoarTime) {
+            searchingRoar.pitch = UnityEngine.Random.Range(searchingRoarPitch - searchingRoarPitchVariance, searchingRoarPitch + searchingRoarPitchVariance);
+            nextRoarTime = calculateRoarTime();
+            searchingRoar.Play();
+        }
+    }
+
     Vector3 lastPosition = Vector3.zero;
+    Vector3 moveLocation = Vector3.zero;
+    float curRadius = 0f;
 
     void HuntPlayer()
     {
@@ -103,7 +155,8 @@ public class RudolphController : MonoBehaviour
         float distance = Vector3.Distance(transform.position, player.transform.position);
         if (SeesPlayer() || HearsPlayer())
         {
-            Debug.Log("Found player by " + (SeesPlayer() ? "seeing" : "hearing") + " them");
+            
+            locatedRoar.Play();
             currentState = State.Chasing;
             moveLocation = player.transform.position;
             curRadius = 0f;
@@ -115,7 +168,6 @@ public class RudolphController : MonoBehaviour
             float smell = Mathf.Pow(smellExponentialDecay, distance);
 
             curRadius = Math.Clamp(smell, minSmellRadius, maxSmellRadius);
-            Debug.Log("Searching for player. Picking a point within radius " + curRadius);
             // Find a safe position for Rudolph to move to. Only try 3 times, otherwise game would crash.
             int tries = 0;
             NavMeshHit hit;
@@ -125,10 +177,8 @@ public class RudolphController : MonoBehaviour
                 var randomOffset = UnityEngine.Random.insideUnitSphere * randomMovePointRadiusOffset;
                 moveLocation = player.transform.position + randomPoint + randomOffset;
                 moveLocation = FindGround(moveLocation);
-                Debug.Log("Trying to move to " + moveLocation);
             } while (!NavMesh.SamplePosition(moveLocation, out hit, 1f, NavMesh.AllAreas) && tries++ < 3);
             moveLocation = hit.position;
-            Debug.Log("Moving to " + moveLocation + ", which is " + Vector3.Distance(moveLocation, player.transform.position) + " away from the player");
 
         }
         agent.SetDestination(moveLocation);
@@ -157,12 +207,11 @@ public class RudolphController : MonoBehaviour
         {
             walkTime += Time.deltaTime;
             agent.SetDestination(transform.position);
-            Debug.Log("Waiting to walk away");
+            huff.Play();
         }
         else if (!seesPlayer && walkTime >= walkAwayTime)
         {
             currentState = State.Hunting;
-            Debug.Log("Lost interest in player");
             hideTime = 0f;
             walkTime = 0f;
         }

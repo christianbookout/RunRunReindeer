@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -7,8 +9,12 @@ public class PlayerController : MonoBehaviour
     public float speed = 3f;
     public float rotationSpeed = 2f;
     public float runSpeed = 5f;
-    public float runSeconds = 5f;
-    public float runCooldownSeconds = 5f;
+    [Header("Stamina")]
+    public float maxStamina = 100f;
+    public float stamina = 100f;
+    public float staminaDepletionRate = 10f;
+    public float staminaRegenRate = 5f; 
+    public float runCooldownSeconds = 2f;
     [Header("Headbob/Breathing")]
     public float headbobWalkMagnitude = 0.05f;
     public float headbobRunMagnitude = 0.1f;
@@ -17,6 +23,9 @@ public class PlayerController : MonoBehaviour
     public float breatheSpeed = 0.5f;
     public Camera playerCamera;
 
+    public bool IsRunning { get; private set; } = false;
+    public bool IsWalking { get; private set; } = false;
+    
     private CharacterController characterController;
     private PlayerFootsteps playerFootsteps;
     private Vector3 originalCameraPosition;
@@ -24,9 +33,8 @@ public class PlayerController : MonoBehaviour
     private float breatheTimer = 0.0f;
     private bool lastFrameWasMoving = false;
     private float targetBobPos = 0f;
-    public bool IsRunning { get; private set; } = false;
-    public bool IsWalking { get; private set; } = false;
-    
+    private float runCooldownTimer = 0f;
+    private bool onStaminaCooldown = false;
 
     public void Start()
     {
@@ -43,12 +51,50 @@ public class PlayerController : MonoBehaviour
     public void Update()
     {
         HandleMovementInput();
+        HandleStaminaCooldown();
         AddGravity();
+    }    
+    
+    private void HandleStaminaCooldown()
+    {
+        if (onStaminaCooldown)
+        {
+            runCooldownTimer -= Time.deltaTime;
+            if (runCooldownTimer <= 0)
+            {
+                onStaminaCooldown = false;
+            }
+        }
     }
 
     private void AddGravity() {
         var gravity = Physics.gravity;
         characterController.Move(gravity * Time.deltaTime);
+    }
+
+    private float GetSpeed(bool attemptingToRun) {
+        float curSpeed = speed;
+        if (attemptingToRun && !onStaminaCooldown)
+        {
+            if (stamina > 0)
+            {
+                IsRunning = true;
+                curSpeed = runSpeed;
+                stamina -= staminaDepletionRate * Time.deltaTime;
+            }
+            else
+            {
+                IsRunning = false;
+                onStaminaCooldown = true;
+                runCooldownTimer = runCooldownSeconds;
+            }
+        }
+        else
+        {
+            stamina += staminaRegenRate * Time.deltaTime;
+        }
+        stamina = Mathf.Clamp(stamina, 0, maxStamina);
+        return curSpeed;
     }
 
     private void HandleMovementInput()
@@ -58,9 +104,9 @@ public class PlayerController : MonoBehaviour
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
         Vector3 moveDirection = transform.TransformDirection(direction);
 
-        IsRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeed = IsRunning ? runSpeed : speed;
+        var attemptingToRun = Input.GetKey(KeyCode.LeftShift);
 
+        var curSpeed = GetSpeed(attemptingToRun);
         characterController.Move(moveDirection * curSpeed * Time.deltaTime);
 
         float mouseX = Input.GetAxis("Mouse X") * rotationSpeed;

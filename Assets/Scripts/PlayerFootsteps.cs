@@ -6,7 +6,7 @@ public class PlayerFootsteps : MonoBehaviour
     private bool isMoving;
     private bool isRunning;
     public Vector2 pitchRange = new(0.7f, 0.9f);
-    public Vector2 volumeRange = new(0.5f, 0.9f);
+    public Vector2 volumeRange = new(0.3f, 0.6f);
 
 
     private void Start()

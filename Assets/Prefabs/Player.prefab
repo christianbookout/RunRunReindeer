@@ -276,11 +276,14 @@ MonoBehaviour:
   speed: 3
   rotationSpeed: 2
   runSpeed: 5
-  runSeconds: 5
-  runCooldownSeconds: 5
-  headbobWalkMagnitude: 0.05
-  headbobRunMagnitude: 0.1
-  headbobSpeed: 2
+  maxStamina: 100
+  stamina: 100
+  staminaDepletionRate: 10
+  staminaRegenRate: 8
+  runCooldownSeconds: 3
+  headbobWalkMagnitude: 0.1
+  headbobRunMagnitude: 0.12
+  headbobSpeed: 3
   breathingAmplitude: 0.1
   breatheSpeed: 0.5
   playerCamera: {fileID: 146120994924229875}
@@ -328,7 +331,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 385a088c397953041af3c9854274f102, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -851,6 +854,14 @@ PrefabInstance:
     - target: {fileID: 2433609317737923964, guid: 0bfaff0aadd50504a933d85a6d94ea0c, type: 3}
       propertyPath: m_Name
       value: Particle System
+      objectReference: {fileID: 0}
+    - target: {fileID: 8497892017329147170, guid: 0bfaff0aadd50504a933d85a6d94ea0c, type: 3}
+      propertyPath: InheritVelocityModule.m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8497892017329147170, guid: 0bfaff0aadd50504a933d85a6d94ea0c, type: 3}
+      propertyPath: InheritVelocityModule.m_Curve.scalar
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
