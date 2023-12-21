@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         gameState = GameState.GameOver;
-        Time.timeScale = 0f;
+        Time.timeScale = 1f;
     }
 
     public void ResetScene()
