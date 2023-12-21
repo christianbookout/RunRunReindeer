@@ -100,8 +100,8 @@ public class PlayerController : MonoBehaviour
     private float verticalRotation = 0f;
     private void HandleMovementInput()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
         Vector3 moveDirection = transform.TransformDirection(direction);
 
@@ -110,8 +110,8 @@ public class PlayerController : MonoBehaviour
         var curSpeed = GetSpeed(attemptingToRun);
         characterController.Move(moveDirection * curSpeed * Time.deltaTime);
 
-        float mouseX = Input.GetAxis("Mouse X") * rotationSpeed;
-        float mouseY = Input.GetAxis("Mouse Y") * rotationSpeed;
+        float mouseX = Input.GetAxisRaw("Mouse X") * rotationSpeed;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * rotationSpeed;
 
         verticalRotation += mouseY;
         verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
