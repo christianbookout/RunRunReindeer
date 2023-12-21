@@ -1,8 +1,10 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject gameOverUI;
     public enum GameState
     {
         Playing,
@@ -27,8 +29,11 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         gameState = GameState.Playing;
         Time.timeScale = 1f;
+        gameOverUI.SetActive(false);
     }
 
     public void PauseGame()
@@ -46,13 +51,17 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         gameState = GameState.GameOver;
-        Time.timeScale = 1f;
+        Time.timeScale = 0f;
+        gameOverUI.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void ResetScene()
     {
         var scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
+        StartGame();
     }
 
 }

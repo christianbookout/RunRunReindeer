@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class AlternatingColors : MonoBehaviour
 {
@@ -14,6 +15,15 @@ public class AlternatingColors : MonoBehaviour
         if (startIntro && isActiveAndEnabled)
         {
             StartCoroutine(RevealText());
+        }
+    }
+
+    void Update()
+    {
+        if (Input.anyKeyDown && startIntro)
+        {
+            StopAllCoroutines();
+            SceneManager.LoadScene("Forest");
         }
     }
 
@@ -39,6 +49,8 @@ public class AlternatingColors : MonoBehaviour
             // Wait for the specified reveal delay
             yield return new WaitForSeconds(revealDelay);
         }
+
+        SceneManager.LoadScene("Forest");
     }
 
     // Public method to set startIntro to true from other scripts

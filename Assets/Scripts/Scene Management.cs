@@ -40,10 +40,7 @@ public class SceneManagement : MonoBehaviour
     // Function to activate the specified GameObject and set startIntro to true
     public void StartIntro()
     {
-        if (alternatingColorsScript != null)
-        {
-            alternatingColorsScript.startIntro = true;
-        }
+        alternatingColorsScript?.StartIntroFromOtherScript();
 
         if (objectToActivate != null)
         {
