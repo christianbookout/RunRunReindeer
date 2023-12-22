@@ -289,7 +289,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 3.8
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -326,12 +326,12 @@ MonoBehaviour:
   searchingRoarPitchVariance: 0.2
   attackDistance: 2.5
   viewAngle: 90
-  loseSightDistance: 20
-  sightDistance: 15
-  hearsRunningDistance: 12.5
-  hearsWalkingDistance: 8
-  loseInterestTime: 4
-  walkAwayTime: 3
+  loseSightDistance: 15
+  sightDistance: 10
+  hearsRunningDistance: 11
+  hearsWalkingDistance: 5
+  loseInterestTime: 2
+  walkAwayTime: 9
   smellExponentialDecay: 1.2
   randomMovePointRadiusOffset: 5
   maxSmellRadius: 50

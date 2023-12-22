@@ -47,6 +47,7 @@ public class RudolphController : MonoBehaviour
 
     private State currentState = State.Hunting;
     private Animator anim;
+    private bool canIdle = true;
 
     void Start()
     {
@@ -87,6 +88,12 @@ public class RudolphController : MonoBehaviour
         }
         else if (currentState == State.Attacking) {
             anim.SetTrigger("attack");
+        }
+        
+        if (canIdle && walkTime > 0 ) {
+            anim.SetTrigger("idle");
+            // Only idle once
+            canIdle = false;
         }
     }
 
@@ -232,6 +239,7 @@ public class RudolphController : MonoBehaviour
             currentState = State.Hunting;
             hideTime = 0f;
             walkTime = 0f;
+            canIdle = true;
         }
         else {
             hideTime = 0f;
