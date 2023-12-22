@@ -46,11 +46,13 @@ public class RudolphController : MonoBehaviour
     }
 
     private State currentState = State.Hunting;
+    private Animator anim;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         playerController = player.GetComponent<PlayerController>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -71,6 +73,21 @@ public class RudolphController : MonoBehaviour
         AddGravity();
         WalkSound();
         SearchingRoar();
+        HandleAnimations();
+    }
+
+    private void HandleAnimations() {
+        if (currentState == State.Chasing) {
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isRunning", true);
+        }
+        else if (currentState == State.Hunting) {
+            anim.SetBool("isWalking", true);
+            anim.SetBool("isRunning", false);
+        }
+        else if (currentState == State.Attacking) {
+            anim.SetTrigger("attack");
+        }
     }
 
     private void WalkSound() {
@@ -230,8 +247,13 @@ public class RudolphController : MonoBehaviour
 
     void AttackPlayer()
     {
-        // TODO other animations or something here?
         player.transform.rotation = Quaternion.LookRotation(transform.position - player.transform.position);
+
+        player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        player.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        player.GetComponent<Rigidbody>().Sleep();
+        // Look a bit up so we can see Rudolph's face
+        agent.SetDestination(transform.position);
         GameManager.Instance.EndGame();
         // Not sure if we want this jumpscare sound or not
         locatedRoar.pitch = 2f;

@@ -204,7 +204,7 @@ Transform:
   - {fileID: 8779206935258775656}
   - {fileID: 6885296316712964078}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5820969930730244067
 MeshFilter:
@@ -324,7 +324,7 @@ MonoBehaviour:
   searchingRoarFrequencyVariance: 15
   searchingRoarPitch: 1
   searchingRoarPitchVariance: 0.2
-  attackDistance: 1.5
+  attackDistance: 2.5
   viewAngle: 90
   loseSightDistance: 20
   sightDistance: 15
@@ -382,9 +382,9 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_Range: 59.5
+  m_SpotAngle: 144
+  m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -603,8 +603,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.15566039, b: 0.20958953, a: 1}
-  m_Intensity: 0.77
-  m_Range: 35.47
+  m_Intensity: 62.48
+  m_Range: 0.51
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -735,7 +735,7 @@ Light:
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
-  m_SpotAngle: 30
+  m_SpotAngle: 144
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
@@ -1211,8 +1211,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.15566039, b: 0.20958953, a: 1}
-  m_Intensity: 0.77
-  m_Range: 35.47
+  m_Intensity: 62.48
+  m_Range: 0.51
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -1337,23 +1337,23 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7036213049465896255, guid: 21b69d74268637d4f999e73f708f8ecd, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 21b69d74268637d4f999e73f708f8ecd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5030596419691922581}
+      addedObject: {fileID: 1397982403087162399}
   m_SourcePrefab: {fileID: 100100000, guid: 21b69d74268637d4f999e73f708f8ecd, type: 3}
---- !u!1 &4152991230967928122 stripped
+--- !u!1 &6108759239626003796 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 7036213049465896255, guid: 21b69d74268637d4f999e73f708f8ecd, type: 3}
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 21b69d74268637d4f999e73f708f8ecd, type: 3}
   m_PrefabInstance: {fileID: 6343256270531078149}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &5030596419691922581
+--- !u!95 &1397982403087162399
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4152991230967928122}
+  m_GameObject: {fileID: 6108759239626003796}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 73230b419c84e3849ab67526108fc5c3, type: 2}
