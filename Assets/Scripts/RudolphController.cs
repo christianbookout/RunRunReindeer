@@ -8,10 +8,11 @@ public class RudolphController : MonoBehaviour
 {
     public GameObject player;
     [Header("Audio")]
-    public AudioSource huff;
+    public AudioSource lostPlayerRoar;
     public AudioSource locatedRoar;
-    public AudioSource searchingRoar;
+    public AudioSource[] searchingRoars;
     public AudioSource footsteps;
+    public AudioSource jumpscare;
     public float footstepsWalkPitch = 1f;
     public float footstepsRunPitch = 1.5f;
     public float searchingRoarFrequency = 30f;
@@ -164,7 +165,7 @@ public class RudolphController : MonoBehaviour
         }
 
         if (Time.time > nextRoarTime) {
-            searchingRoar.pitch = UnityEngine.Random.Range(searchingRoarPitch - searchingRoarPitchVariance, searchingRoarPitch + searchingRoarPitchVariance);
+            var searchingRoar = searchingRoars[UnityEngine.Random.Range(0, searchingRoars.Length)];
             nextRoarTime = calculateRoarTime();
             searchingRoar.Play();
         }
@@ -232,7 +233,6 @@ public class RudolphController : MonoBehaviour
         {
             walkTime += Time.deltaTime;
             agent.SetDestination(transform.position);
-            huff.Play();
         }
         else if (!seesPlayer && walkTime >= walkAwayTime)
         {
@@ -251,6 +251,11 @@ public class RudolphController : MonoBehaviour
         {
             currentState = State.Attacking;
         }
+    }
+
+    public void LostPlayerRoar()
+    {
+        lostPlayerRoar.Play();
     }
 
     void AttackPlayer()
