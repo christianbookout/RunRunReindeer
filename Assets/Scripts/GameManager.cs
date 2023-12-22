@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject);
             return;
         }
         Destroy(gameObject);
@@ -32,9 +32,6 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         gameState = GameState.Playing;
-        Time.timeScale = 1f;
-        Debug.Log("Hit");
-        Debug.Log("Time: "+ Time.timeScale);
         gameOverUI.SetActive(false); 
     }
 
@@ -65,11 +62,11 @@ public class GameManager : MonoBehaviour
 
     public void ResetScene()
     {
-        var scene = SceneManager.GetActiveScene();
-        StartGame();
+        // var scene = SceneManager.GetActiveScene();
+        // StartGame();
+        gameOverUI.SetActive(false);
         SceneManager.LoadScene("Main Menu");
         Time.timeScale = 1f;
-
     }
 
 }

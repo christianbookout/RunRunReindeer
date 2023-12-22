@@ -38,14 +38,12 @@ public class PlayerController : MonoBehaviour
 
     public void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
         characterController = GetComponent<CharacterController>();
         playerFootsteps = gameObject.AddComponent<PlayerFootsteps>();
         playerCamera = GetComponentInChildren<Camera>();
         originalCameraPosition = playerCamera.transform.localPosition;
         targetBobPos = originalCameraPosition.y;
+        GameManager.Instance.StartGame();
     }
 
     public void Update()

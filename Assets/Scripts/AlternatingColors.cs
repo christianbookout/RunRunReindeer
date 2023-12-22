@@ -49,7 +49,6 @@ public class AlternatingColors : MonoBehaviour
             // Wait for the specified reveal delay
             yield return new WaitForSeconds(revealDelay);
         }
-
         SceneManager.LoadScene("Forest");
     }
 

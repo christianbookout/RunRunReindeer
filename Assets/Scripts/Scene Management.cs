@@ -16,7 +16,7 @@ public class SceneManagement : MonoBehaviour
         {
             // If not, set the instance to this and mark it as not to be destroyed
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject);
         }
         else
         {
