@@ -33,7 +33,14 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         gameState = GameState.Playing;
         Time.timeScale = 1f;
-        gameOverUI.SetActive(false);
+        Debug.Log("Hit");
+        Debug.Log("Time: "+ Time.timeScale);
+        gameOverUI.SetActive(false); 
+    }
+
+    void Update()
+    {
+        Debug.Log(Time.timeScale);
     }
 
     public void PauseGame()
@@ -60,8 +67,10 @@ public class GameManager : MonoBehaviour
     public void ResetScene()
     {
         var scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
         StartGame();
+        SceneManager.LoadScene("Main Menu");
+        Time.timeScale = 1f;
+
     }
 
 }
