@@ -56,7 +56,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0
+        functionName: LostPlayerRoar
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 0685740af6a5741c8b28cc06f5136bc3, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -153,7 +160,7 @@ ModelImporter:
       takeName: Armature|RudolphRun
       internalID: 944116836230252969
       firstFrame: 0
-      lastFrame: 118
+      lastFrame: 94
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

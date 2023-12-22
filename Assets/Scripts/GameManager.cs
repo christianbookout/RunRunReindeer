@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         gameState = GameState.GameOver;
-        Time.timeScale = 0f;
         gameOverUI.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

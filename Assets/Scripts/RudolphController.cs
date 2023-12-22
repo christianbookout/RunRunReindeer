@@ -8,10 +8,11 @@ public class RudolphController : MonoBehaviour
 {
     public GameObject player;
     [Header("Audio")]
-    public AudioSource huff;
+    public AudioSource lostPlayerRoar;
     public AudioSource locatedRoar;
-    public AudioSource searchingRoar;
+    public AudioSource[] searchingRoars;
     public AudioSource footsteps;
+    public AudioSource jumpscare;
     public float footstepsWalkPitch = 1f;
     public float footstepsRunPitch = 1.5f;
     public float searchingRoarFrequency = 30f;
@@ -46,11 +47,14 @@ public class RudolphController : MonoBehaviour
     }
 
     private State currentState = State.Hunting;
+    private Animator anim;
+    private bool canIdle = true;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         playerController = player.GetComponent<PlayerController>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -71,6 +75,27 @@ public class RudolphController : MonoBehaviour
         AddGravity();
         WalkSound();
         SearchingRoar();
+        HandleAnimations();
+    }
+
+    private void HandleAnimations() {
+        if (currentState == State.Chasing) {
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isRunning", true);
+        }
+        else if (currentState == State.Hunting) {
+            anim.SetBool("isWalking", true);
+            anim.SetBool("isRunning", false);
+        }
+        else if (currentState == State.Attacking) {
+            anim.SetTrigger("attack");
+        }
+        
+        if (canIdle && walkTime > 0 ) {
+            anim.SetTrigger("idle");
+            // Only idle once
+            canIdle = false;
+        }
     }
 
     private void WalkSound() {
@@ -140,7 +165,7 @@ public class RudolphController : MonoBehaviour
         }
 
         if (Time.time > nextRoarTime) {
-            searchingRoar.pitch = UnityEngine.Random.Range(searchingRoarPitch - searchingRoarPitchVariance, searchingRoarPitch + searchingRoarPitchVariance);
+            var searchingRoar = searchingRoars[UnityEngine.Random.Range(0, searchingRoars.Length)];
             nextRoarTime = calculateRoarTime();
             searchingRoar.Play();
         }
@@ -208,13 +233,13 @@ public class RudolphController : MonoBehaviour
         {
             walkTime += Time.deltaTime;
             agent.SetDestination(transform.position);
-            huff.Play();
         }
         else if (!seesPlayer && walkTime >= walkAwayTime)
         {
             currentState = State.Hunting;
             hideTime = 0f;
             walkTime = 0f;
+            canIdle = true;
         }
         else {
             hideTime = 0f;
@@ -228,10 +253,20 @@ public class RudolphController : MonoBehaviour
         }
     }
 
+    public void LostPlayerRoar()
+    {
+        lostPlayerRoar.Play();
+    }
+
     void AttackPlayer()
     {
-        // TODO other animations or something here?
         player.transform.rotation = Quaternion.LookRotation(transform.position - player.transform.position);
+
+        player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        player.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        player.GetComponent<Rigidbody>().Sleep();
+        // Look a bit up so we can see Rudolph's face
+        agent.SetDestination(transform.position);
         GameManager.Instance.EndGame();
         // Not sure if we want this jumpscare sound or not
         locatedRoar.pitch = 2f;
