@@ -4,6 +4,10 @@ public class PlayerFootsteps : MonoBehaviour
 {
     private AudioSource footstepsAudioSource;
     private bool isMoving;
+    private bool isRunning;
+    public Vector2 pitchRange = new(0.7f, 0.9f);
+    public Vector2 volumeRange = new(0.3f, 0.6f);
+
 
     private void Start()
     {
@@ -33,29 +37,34 @@ public class PlayerFootsteps : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void Update()
     {
         // Play footsteps sound when moving
         if (isMoving && !footstepsAudioSource.isPlaying)
         {
-            footstepsAudioSource.volume = Random.Range(0.5f, 0.9f);
-            footstepsAudioSource.pitch = Random.Range(0.7f, 0.9f);
+            // Increase local volume and pitch ranges if is running
+            var curVolumeRange = volumeRange;
+            var curPitchRange = pitchRange;
+            if (isRunning)
+            {
+                curVolumeRange += new Vector2(0.2f, 0.2f);
+                curPitchRange += new Vector2(0.2f, 0.2f);
+            }
+
+            footstepsAudioSource.volume = Random.Range(curVolumeRange.x, curVolumeRange.y);
+            footstepsAudioSource.pitch = Random.Range(curPitchRange.x, curPitchRange.y);
             footstepsAudioSource.Play();
-            Debug.Log("Playing Footsteps");
         }
         else if (!isMoving && footstepsAudioSource.isPlaying)
         {
             footstepsAudioSource.Stop();
-            Debug.Log("Stopping Footsteps");
         }
-
-        Debug.Log("isMoving: " + isMoving);
-        Debug.Log("Is Playing: " + footstepsAudioSource.isPlaying);
     }
 
-    public void SetIsMoving(bool moving)
+    public void SetIsMoving(bool moving, bool isRunning = false)
     {
         isMoving = moving;
+        this.isRunning = isRunning;
     }
 
     // Recursive function to find a child by name within a hierarchy
