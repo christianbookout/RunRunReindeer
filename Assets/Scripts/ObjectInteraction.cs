@@ -49,6 +49,14 @@ public class ObjectInteraction : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Part"))
+        {
+            PickUpObject(collision.gameObject);
+        }
+    }
+
     private void PickUpObject(GameObject objectToPickUp)
     {
         // Example: Destroy the object when picked up

@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
         // var scene = SceneManager.GetActiveScene();
         // StartGame();
         gameOverUI.SetActive(false);
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("Forest");
         Time.timeScale = 1f;
     }
 
