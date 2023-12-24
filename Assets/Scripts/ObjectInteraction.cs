@@ -13,6 +13,7 @@ public class ObjectInteraction : MonoBehaviour
     public Camera cutsceneCamera;
     public Transform sleighTransform; // Reference to the sleigh Transform
     public GameObject rudolphObject; // Reference to the Rudolph GameObject
+    public AudioSource pickUpSound; // Reference to the AudioSource for pick up sound
 
     private int partsFound = 0;
     private int totalParts = 4;
@@ -83,6 +84,12 @@ public class ObjectInteraction : MonoBehaviour
     {
         // Example: Destroy the object when picked up
         Destroy(objectToPickUp);
+
+        // Play the pick up sound
+        if (pickUpSound != null)
+        {
+            pickUpSound.Play();
+        }
 
         // Increment the parts found counter
         partsFound++;
