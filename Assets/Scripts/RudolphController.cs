@@ -259,18 +259,19 @@ public class RudolphController : MonoBehaviour
     }
 
     void AttackPlayer()
-    {
-        player.transform.rotation = Quaternion.LookRotation(transform.position - player.transform.position);
+{
+    player.GetComponent<Collider>().enabled = false;
+    // Freeze the player in place
+    player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
-        player.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        player.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-        player.GetComponent<Rigidbody>().Sleep();
-        // Look a bit up so we can see Rudolph's face
-        agent.SetDestination(transform.position);
-        GameManager.Instance.EndGame();
-        // Not sure if we want this jumpscare sound or not
-        locatedRoar.pitch = 2f;
-        locatedRoar.Play();
-        // TODO end game UI
-    }
+    // Look at Rudolph's face
+    Vector3 rudolphFacePosition = transform.position + new Vector3(0, 2.3f, 0);
+    player.transform.LookAt(rudolphFacePosition, Vector3.up);
+
+    agent.SetDestination(transform.position);
+    GameManager.Instance.EndGame();
+    locatedRoar.pitch = 2f;
+    locatedRoar.Play();
+}
+
 }
