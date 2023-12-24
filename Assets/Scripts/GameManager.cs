@@ -35,11 +35,6 @@ public class GameManager : MonoBehaviour
         gameOverUI.SetActive(false); 
     }
 
-    void Update()
-    {
-        Debug.Log(Time.timeScale);
-    }
-
     public void PauseGame()
     {
         gameState = GameState.Paused;
