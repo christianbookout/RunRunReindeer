@@ -18,10 +18,12 @@ public class PlayerController : MonoBehaviour
     [Header("Headbob/Breathing")]
     public float headbobWalkMagnitude = 0.05f;
     public float headbobRunMagnitude = 0.1f;
-    public float headbobSpeed = 2f;
+    public float headbobWalkSpeed = 1f;
+    public float headbobRunSpeed = 2f;
     public float breathingAmplitude = 0.1f;
     public float breatheSpeed = 0.5f;
     public Camera playerCamera;
+    public AudioSource breathing;
 
     public bool IsRunning { get; private set; } = false;
     public bool IsWalking { get; private set; } = false;
@@ -39,8 +41,8 @@ public class PlayerController : MonoBehaviour
     public void Start()
     {
         characterController = GetComponent<CharacterController>();
-        playerFootsteps = gameObject.AddComponent<PlayerFootsteps>();
         playerCamera = GetComponentInChildren<Camera>();
+        playerFootsteps = GetComponent<PlayerFootsteps>();
         originalCameraPosition = playerCamera.transform.localPosition;
         targetBobPos = originalCameraPosition.y;
         GameManager.Instance.StartGame();
@@ -52,7 +54,21 @@ public class PlayerController : MonoBehaviour
         HandleMovementInput();
         HandleStaminaCooldown();
         AddGravity();
+        BreathSound();
     }    
+
+    public void BreathSound() {
+        // Play the breath sound louder/faster when stamina is depleted.
+        breathing.volume = 1 - (stamina / maxStamina);
+        breathing.pitch = 2 - (stamina / maxStamina);
+        
+        if (stamina > 0 && !breathing.isPlaying) {
+            breathing.Play();
+        }
+        else if (stamina <= 0 && breathing.isPlaying) {
+            breathing.Stop();
+        }
+    }
     
     private void HandleStaminaCooldown()
     {
@@ -78,12 +94,14 @@ public class PlayerController : MonoBehaviour
             if (stamina > 0)
             {
                 IsRunning = true;
+                playerFootsteps.isRunning = true;
                 curSpeed = runSpeed;
                 stamina -= staminaDepletionRate * Time.deltaTime;
             }
             else
             {
                 IsRunning = false;
+                playerFootsteps.isRunning = false;
                 onStaminaCooldown = true;
                 runCooldownTimer = runCooldownSeconds;
             }
@@ -91,6 +109,8 @@ public class PlayerController : MonoBehaviour
         else
         {
             stamina += staminaRegenRate * Time.deltaTime;
+            IsRunning = false;
+            playerFootsteps.isRunning = false;
         }
         stamina = Mathf.Clamp(stamina, 0, maxStamina);
         return curSpeed;
@@ -118,15 +138,15 @@ public class PlayerController : MonoBehaviour
 
         bool isGrounded = Physics.Raycast(transform.position, Vector3.down, out _, 1.5f);
         bool isMoving = isGrounded && characterController.velocity.magnitude > 0;
-        playerFootsteps.SetIsMoving(isMoving, IsRunning);
+        playerFootsteps.SetIsMoving(isMoving);
 
         if (isMoving) {
             if (!lastFrameWasMoving) headbobTimer = 0f;
-            headbobTimer += Time.deltaTime * speed * headbobSpeed;
+            headbobTimer += Time.deltaTime * (IsRunning ? headbobRunSpeed : headbobWalkSpeed);
             Headbob(IsRunning ? headbobRunMagnitude : headbobWalkMagnitude);
         } else {
             if (lastFrameWasMoving) breatheTimer = 0f;
-            breatheTimer += Time.deltaTime * speed * breatheSpeed;
+            breatheTimer += Time.deltaTime * breatheSpeed * (10 - (10 * (stamina / maxStamina)));
             BreatheHeadBob();
         }
         // Lerp between current camera y and target bob position

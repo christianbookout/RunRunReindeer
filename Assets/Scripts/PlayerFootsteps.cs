@@ -2,88 +2,56 @@ using UnityEngine;
 
 public class PlayerFootsteps : MonoBehaviour
 {
-    private AudioSource footstepsAudioSource;
-    private bool isMoving;
-    private bool isRunning;
-    public Vector2 pitchRange = new(0.7f, 0.9f);
-    public Vector2 volumeRange = new(0.3f, 0.6f);
+    public AudioSource[] footstepsAudioSources;
+    public bool isMoving;
+    public bool isRunning;
+    public float walkPitch = 0.7f;
+    public float runPitch = 1f;
+    public float walkVolume = 0.5f;
+    public float runVolume = 0.75f;
 
 
-    private void Start()
-    {
-        // Find the "Footsteps" GameObject within the player's hierarchy
-        Transform footstepsTransform = FindChildRecursively(transform, "Footsteps");
+    private AudioSource RandomAudioSource => footstepsAudioSources[Random.Range(0, footstepsAudioSources.Length)];
 
-        if (footstepsTransform != null)
-        {
-            // Attempt to get an existing AudioSource component
-            footstepsAudioSource = footstepsTransform.GetComponent<AudioSource>();
-
-            // If no AudioSource is found, add one
-            if (footstepsAudioSource == null)
-            {
-                footstepsAudioSource = footstepsTransform.gameObject.AddComponent<AudioSource>();
+    private bool AnyFootstepPlaying() {
+        foreach (var audioSource in footstepsAudioSources) {
+            if (audioSource.isPlaying) {
+                return true;
             }
         }
-        else
-        {
-            Debug.LogError("Footsteps GameObject not found within the player's hierarchy.");
-        }
+        return false;
+    }
 
-        // Ensure the AudioSource doesn't play on awake
-        if (footstepsAudioSource != null)
-        {
-            footstepsAudioSource.playOnAwake = false;
+    private void StopAllFootsteps() {
+        foreach (var audioSource in footstepsAudioSources) {
+            audioSource.Stop();
+        }
+    }
+    public void UpdateAllFootsteps() {
+        // Increase local volume and pitch ranges if is running
+        foreach (var audioSource in footstepsAudioSources) {
+            audioSource.volume = isRunning ? runVolume : walkVolume;
+            audioSource.pitch = isRunning ? runPitch : walkPitch;
         }
     }
 
     public void Update()
     {
+        UpdateAllFootsteps();
         // Play footsteps sound when moving
-        if (isMoving && !footstepsAudioSource.isPlaying)
+        if (isMoving && !AnyFootstepPlaying())
         {
-            // Increase local volume and pitch ranges if is running
-            var curVolumeRange = volumeRange;
-            var curPitchRange = pitchRange;
-            if (isRunning)
-            {
-                curVolumeRange += new Vector2(0.2f, 0.2f);
-                curPitchRange += new Vector2(0.2f, 0.2f);
-            }
-
-            footstepsAudioSource.volume = Random.Range(curVolumeRange.x, curVolumeRange.y);
-            footstepsAudioSource.pitch = Random.Range(curPitchRange.x, curPitchRange.y);
+            var footstepsAudioSource = RandomAudioSource;
             footstepsAudioSource.Play();
         }
-        else if (!isMoving && footstepsAudioSource.isPlaying)
+        else if (!isMoving && AnyFootstepPlaying())
         {
-            footstepsAudioSource.Stop();
+            StopAllFootsteps();
         }
     }
 
-    public void SetIsMoving(bool moving, bool isRunning = false)
+    public void SetIsMoving(bool moving)
     {
         isMoving = moving;
-        this.isRunning = isRunning;
-    }
-
-    // Recursive function to find a child by name within a hierarchy
-    private Transform FindChildRecursively(Transform parent, string childName)
-    {
-        foreach (Transform child in parent)
-        {
-            if (child.name == childName)
-            {
-                return child;
-            }
-
-            Transform result = FindChildRecursively(child, childName);
-            if (result != null)
-            {
-                return result;
-            }
-        }
-
-        return null;
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ItemSpawner
   - GameOverUI
+  - Part
   layers:
   - Default
   - TransparentFX
